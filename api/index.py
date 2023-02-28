@@ -1,16 +1,22 @@
 from flask import Flask, request, jsonify
 import pytesseract
 from PIL import Image
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
+
 
 @app.route('/')
 def home():
     return 'Hello, World!'
 
+
 @app.route('/about')
 def about():
     return 'About'
+
+
 @app.route('/', methods=['POST'])
 def extract_words():
     # Get the image URI from the request
