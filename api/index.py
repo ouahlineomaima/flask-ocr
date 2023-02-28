@@ -18,7 +18,7 @@ def home():
 def about():
     return 'About'
 
-
+#test
 @app.route('/extract_words', methods=["GET", 'POST'])
 def extract_words():
     if request.method == 'GET':
