@@ -1,4 +1,7 @@
 {
+  "builds": [
+    { "src": "vercel_build.sh", "use": "@now/static-build" }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/api/index" }
   ]
