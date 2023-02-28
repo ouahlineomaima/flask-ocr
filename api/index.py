@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 import pytesseract
+import requests
+from io import BytesIO
 from PIL import Image
 from flask_cors import CORS
 
@@ -25,11 +27,8 @@ def extract_words():
         # Get the image URI from the request
         image_uri = request.json['image_uri']
 
-        # Download the image from the URI
-        #response = requests.get(image_uri)
-
-        # Load the image into a PIL Image object
-        img = Image.open(image_uri)
+        response = requests.get(image_uri)
+        img = Image.open(BytesIO(response.content))
 
         # Use Pytesseract to extract text from the image
         text = pytesseract.image_to_string(img)
