@@ -1,1 +1,3 @@
 Flask==2.2.2
+pytesseract==0.3.10
+PIL=1.1.6
