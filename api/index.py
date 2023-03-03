@@ -18,26 +18,41 @@ def home():
 def about():
     return 'About'
 
-#test
+
+# test
 @app.route('/extract_words', methods=["GET", 'POST'])
 def extract_words():
     if request.method == 'GET':
         return "hi"
     if request.method == 'POST':
+
         # Get the image URI from the request
         image_uri = request.json['image_uri']
+        if 'http' in image_uri:
+            response = requests.get(image_uri)
+            img = Image.open(BytesIO(response.content))
 
-        response = requests.get(image_uri)
-        img = Image.open(BytesIO(response.content))
+            # Use Pytesseract to extract text from the image
+            text = pytesseract.image_to_string(img)
 
-        # Use Pytesseract to extract text from the image
-        text = pytesseract.image_to_string(img)
+            # Split the text into words
+            words = text.split()
 
-        # Split the text into words
-        words = text.split()
+            # Return the list of words as a JSON response
+            return jsonify({'words': words})
+        else:
+            # Load the image into a PIL Image object
+            img = Image.open(image_uri)
 
-        # Return the list of words as a JSON response
-        return jsonify({'words': words})
+            # Use Pytesseract to extract text from the image
+            text = pytesseract.image_to_string(img)
+
+            # Split the text into words
+            words = text.split()
+
+            # Return the list of words as a JSON response
+            return jsonify({'words': words})
+
 
 if __name__ == '__main__':
     app.run()
