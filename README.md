@@ -1,28 +1,95 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask&demo-title=Flask%20%2B%20Vercel&demo-description=Use%20Flask%202%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
+[[Visit the API]](https://flaskocrapi.azurewebsites.net)
 
-# Flask + Vercel
+# Flask + pytesseract
 
-This example shows how to use Flask 2 on Vercel with Serverless Functions using the [Python Runtime](https://vercel.com/docs/concepts/functions/serverless-functions/runtimes/python).
+This API recognize the text from a given image
+it supports image from web (by giving the url) or local images by giving their base64 string
 
-## Demo
+## Link
 
-https://flask-python-template.vercel.app/
+https://flaskocrapi.azurewebsites.net
 
 ## How it Works
 
-This example uses the Web Server Gateway Interface (WSGI) with Flask to enable handling requests on Vercel with Serverless Functions.
+Send a POST request to https://flaskocrapi.azurewebsites.net/extract_words with a body in JSON format containing image_uri and image attributes
+The image attribute must contain the base64 string of the image
 
-## Running Locally
+## Example with terminal
 
 ```bash
-npm i -g vercel
-vercel dev
+curl -X POST -H 'Content-Type: application/json' -d '{"image_uri": "https://www.manger-citoyen.org/img/posts/48.jpg", "image":"null"}' https://flaskocrapi.azurewebsites.net/extract_words
+
+{
+    "words": [
+        "tomate,",
+        "farine",
+        "de",
+        "blé,",
+        "saindoux,",
+        "sel,",
+        "aréme,",
+        "gélifiants",
+        ":",
+        "farine",
+        "de",
+        "graines",
+        "de",
+        "caroube",
+        "et",
+        "ome",
+        "guar",
+        ".",
+        "Haricots",
+        "blancs",
+        "précuits",
+        "(",
+        "f",
+        "isses",
+        "fumées",
+        "(18%)",
+        ":",
+        "viande",
+        "de",
+        "din",
+        "le",
+        "porc,",
+        "maigre",
+        "de",
+        "téte",
+        "de",
+        "pore,",
+        "via",
+        "le",
+        "porc,",
+        "eau,",
+        "farinede",
+        "blé,",
+        "protéine",
+        "soja,",
+        "couenne",
+        "de",
+        "porc,",
+        "sel,",
+        "gelifiant;",
+        "E40",
+        "stabilisants:",
+        "£450,",
+        "£452,",
+        "aromes,",
+        "coriandre,",
+        "conservateurs:",
+        "£250,",
+        "£316,",
+        "exhausteur",
+        "de,",
+        "goilt",
+        ";",
+        "E621,",
+        "protéines",
+        "de",
+        "lait."
+    ]
+}
 ```
 
-Your Flask application is now available at `http://localhost:3000`.
 
-## One-Click Deploy
-
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=vercel-examples):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fexamples%2Ftree%2Fmain%2Fpython%2Fflask&demo-title=Flask%20%2B%20Vercel&demo-description=Use%20Flask%202%20on%20Vercel%20with%20Serverless%20Functions%20using%20the%20Python%20Runtime.&demo-url=https%3A%2F%2Fflask-python-template.vercel.app%2F&demo-image=https://assets.vercel.com/image/upload/v1669994156/random/flask.png)
